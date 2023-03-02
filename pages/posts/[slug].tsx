@@ -1,11 +1,29 @@
 import { PostDetailsContent } from "@/components";
-import { useRouter } from "next/router"
+import { Post } from "@/interfaces/Post.interface";
+import { getPostData, getSlugs } from "@/lib/post-utils";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
-export default function PostDetails() {
+export const PostDetails: NextPage<{ post: Post }> = ({ post }) =>
+  <PostDetailsContent post={post} />
 
-  const { query } = useRouter();
+export const getStaticPaths: GetStaticPaths = async () => {
 
-  return (
-    <PostDetailsContent/>
-  )
+  const slugs = getSlugs();
+
+  return {
+    paths: slugs.map(slug => ({ params: { slug } })),
+    fallback: false
+  }
 }
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const post = getPostData(context.params?.slug as string);
+  return {
+    props: {
+      post
+    },
+    revalidate: 600
+  }
+}
+
+export default PostDetails;

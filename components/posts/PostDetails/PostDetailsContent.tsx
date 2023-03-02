@@ -1,22 +1,19 @@
-import { Post } from '@/interfaces/Post.interface'
-import classes from './PostDetailsContent.module.css'
+import ReactMarkdown from 'react-markdown'
 import PostDetailsHeader from './PostDetailsHeader'
+import classes from './PostDetailsContent.module.css'
+import { Post } from '@/interfaces/Post.interface'
 
-const DUMMY_POST = {
-  slug: 'getting-started-nextjs',
-  title: 'Getting Started with NextJS',
-  image: 'getting-started-nextjs.png',
-  date: '2023-02-02',
-  description: 'React framework for production ready applications - it makes building fullstack apps a breeze and ships with SSR',
-  content: '# This is a first post',
+type Props = {
+  post: Post
 }
-export default function PostDetailsContent() {
-  const post = DUMMY_POST;
+
+export default function PostDetailsContent({post}: Props) {
   const { slug, title, image, content } = post;
+
   return (
     <article className={classes.content}>
       <PostDetailsHeader key={post.slug} title={title} image={`/images/posts/${slug}/${image}`} />
-      { content }
+      <ReactMarkdown>{content}</ReactMarkdown>
     </article>
   )
 }

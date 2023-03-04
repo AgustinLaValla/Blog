@@ -43,9 +43,9 @@ export default function PostDetailsContent({ post }: Props) {
 
     code(code: CodeProps) {
       { code.node.content }
-      const { children, className, ...props } = code;
+      const { children, lang } = code;
       return <SyntaxHighlighter
-        language={code.lang as string}
+        language={lang}
         style={codeStyle}
         children={String(children).replace(/\n$/, "")}
       />

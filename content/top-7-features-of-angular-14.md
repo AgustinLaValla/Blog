@@ -29,9 +29,11 @@ import { bootstrapApplication } from '@angular/platform-browser';
         // import standalone Components, Directives, and Pipes
         CommonModule // and NgModules
     ],
-    template: '<h1>Hello World!</h1>',
+    template: '{{name}}',
 })
-export class SampleComponent {}
+export class SampleComponent {
+    name = "Angular 14";
+}
 // Bootstrap a new Angular application using our `SampleComponent` as a root component.
 bootstrapApplication(SampleComponent);
 

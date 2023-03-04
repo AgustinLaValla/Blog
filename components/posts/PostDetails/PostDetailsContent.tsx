@@ -1,8 +1,12 @@
+import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
+import { CodeProps } from 'react-markdown/lib/ast-to-react'
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark as codeStyle } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+
 import PostDetailsHeader from './PostDetailsHeader'
 import classes from './PostDetailsContent.module.css'
 import { Post } from '@/interfaces/Post.interface'
-import Image from 'next/image'
 
 type Props = {
   post: Post
@@ -36,6 +40,16 @@ export default function PostDetailsContent({ post }: Props) {
 
       return <p>{paragraph.children}</p>;
     },
+
+    code(code: CodeProps) {
+      { code.node.content }
+      const { children, className, ...props } = code;
+      return <SyntaxHighlighter
+        language={code.lang as string}
+        style={codeStyle}
+        children={String(children).replace(/\n$/, "")}
+      />
+    }
 
   };
 

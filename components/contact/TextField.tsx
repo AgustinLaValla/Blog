@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import styles from './ContextForm.module.css';
 
 type TextFieldProps = {
@@ -6,14 +7,37 @@ type TextFieldProps = {
   required?: boolean;
   value?: string;
   isTextArea?: boolean;
-  rows?: number
+  rows?: number;
+  label?: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
-export const TextField = ({ name, required, type = 'text', value, isTextArea, rows = 10 }: TextFieldProps) =>
+export const TextField = ({
+  name,
+  required,
+  type = 'text',
+  value,
+  isTextArea,
+  rows = 10,
+  label = '',
+  onChange = () => { }
+}: TextFieldProps) =>
   <div className={styles.control}>
-    <label htmlFor={name}>Your Email</label>
+    <label htmlFor={name}>{label}</label>
     {!isTextArea
-      ? <input type={type} name={name} id={name} required={required} />
-      : <textarea name={name} id={name} rows={rows}></textarea>
+      ? <input
+          type={type}
+          name={name}
+          id={name}
+          required={required}
+          value={value}
+          onChange={onChange}
+      />
+      : <textarea
+          name={name}
+          id={name}
+          rows={rows}
+          value={value}
+          onChange={onChange} ></textarea>
     }
   </div>;

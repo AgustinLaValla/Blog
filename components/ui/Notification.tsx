@@ -20,6 +20,6 @@ export default function Notification({ title, message, status }: Props) {
       <h2>{title}</h2>
       <p>{message}</p>
     </div>,
-    document.body
+    document.getElementById('notifications') as HTMLElement
   );
 }

@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   let client: MongoClient;
 
   try {
-    client = await MongoClient.connect(process.env.MONGODB_CREDENTIALS);
+    client = await MongoClient.connect(process.env.MONGODB_CREDENTIALS as string);
 
   } catch (error) {
     return res.status(500).json({

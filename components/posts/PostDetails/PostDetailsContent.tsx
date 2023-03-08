@@ -47,8 +47,9 @@ export default function PostDetailsContent({ post }: Props) {
       return <SyntaxHighlighter
         language={lang}
         style={codeStyle}
-        children={String(children).replace(/\n$/, "")}
-      />
+      >
+        {String(children).replace(/\n$/, "")}
+      </SyntaxHighlighter>
     }
 
   };
